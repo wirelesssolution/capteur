@@ -3,19 +3,19 @@ ps -ef | grep systemd.daily
 apt-get update
 apt-get install git
 
-wget -q -O /etc/openhabian.conf  https://raw.githubusercontent.com/wirelesssolution/condoconfig/master/openhabian.conf.dist
+wget -q -O /etc/openhabian.conf  https://raw.githubusercontent.com/wirelesssolution/capteur/master/openhabian.conf.dist
 
 
 git clone https://github.com/openhab/openhabian.git /opt/openhabian
 ln -s /opt/openhabian/openhabian-setup.sh /usr/local/bin/openhabian-config
 /usr/local/bin/openhabian-config unattended
 
-wget -q -O /etc/openhab2/scripts/cron.sh https://raw.githubusercontent.com/wirelesssolution/condoconfig/master/scripts/cron.sh
+wget -q -O /etc/openhab2/scripts/cron.sh https://raw.githubusercontent.com/wirelesssolution/capteur/master/scripts/cron.sh
 sudo /bin/chmod 755 /etc/openhab2/scripts/cron.sh 
 cronjob="*/1 * * * * /etc/openhab2/scripts/cron.sh"
 (crontab -u root -l; echo "$cronjob" ) | crontab -u root -
 
-wget -q -O /etc/openhab2/services/addons.cfg  https://raw.githubusercontent.com/wirelesssolution/condoconfig/master/services/addons.cfg
+wget -q -O /etc/openhab2/services/addons.cfg  https://raw.githubusercontent.com/wirelesssolution/capteur/master/services/addons.cfg
 
 echo "Install MQTT Server"
 apt -y --no-install-recommends install mosquitto mosquitto-clients
@@ -33,7 +33,8 @@ rm -fr condoconfig/
 echo "Start OpenHab"
 /etc/init.d/openhab2 start
  
-cls
+clear
+sleep 60
 
 cd /etc/openhab2/services
 echo "UUID"

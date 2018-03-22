@@ -33,7 +33,8 @@ rm -fr condoconfig/
 echo "Start OpenHab"
 /etc/init.d/openhab2 start
  
-cls
+clear
+sleep 60
 
 cd /etc/openhab2/services
 echo "UUID"

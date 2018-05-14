@@ -18,3 +18,4 @@ fi
 #done
 #echo 255 > /sys/class/leds/green_led/brightness
 #echo "OK"
+rm -f /var/log/openhab2/*.1

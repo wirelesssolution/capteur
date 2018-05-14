@@ -35,16 +35,14 @@ echo "Start OpenHab"
  echo "add Samba User "
 (echo ciadmin;echo ciadmin) | sudo /usr/bin/smbpasswd  -s -a openhab
 
-clear
+
 sleep 10
+clear
 
 
 
 
-echo "change logo size 145x40 pixcel"
-scp /etc/openhab2/logo paperui/img/logo
-
-tail -f  /var/log/openhab2/openhab.log
+tail -F /var/log/openhab2/openhab.log /var/log/openhab2/events.log
 
 
 

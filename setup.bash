@@ -32,9 +32,8 @@ rm -fr condoconfig/
 echo "Start OpenHab"
 /etc/init.d/openhab2 start
  
- echo "set samba password "
-sudo /usr/bin/smbpasswd  openhab
-(echo ciadmin; echo ciadmin) | sudo /usr/bin/smbpasswd  openhab -s
+ echo "add Samba User "
+(echo ciadmin;echo ciadmin) | sudo /usr/bin/smbpasswd  -s -a openhab
 
 clear
 sleep 10

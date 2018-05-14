@@ -44,5 +44,8 @@ sleep 10
 echo "change logo size 145x40 pixcel"
 scp /etc/openhab2/logo paperui/img/logo
 
+tail -f  /var/log/openhab2/openhab.log
+
+
 
 

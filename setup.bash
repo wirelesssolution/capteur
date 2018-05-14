@@ -14,7 +14,7 @@ sudo /bin/chmod 755 /etc/openhab2/scripts/cron.sh
 cronjob="*/1 * * * * /etc/openhab2/scripts/cron.sh"
 (crontab -u root -l; echo "$cronjob" ) | crontab -u root -
 
-wget -q -O /etc/openhab2/services/addons.cfg  https://raw.githubusercontent.com/wirelesssolution/capteur/master/services/addons.cfg
+
 
 echo "Install MQTT Server"
 apt -y --no-install-recommends install mosquitto mosquitto-clients
@@ -28,6 +28,8 @@ git clone https://github.com/wirelesssolution/condoconfig.git
 cp -R condoconfig/* /etc/openhab2
 chown -R openhab:openhab /etc/openhab2
 rm -fr condoconfig/
+
+wget -q -O /etc/openhab2/services/addons.cfg  https://raw.githubusercontent.com/wirelesssolution/capteur/master/services/addons.cfg
 
 echo "Start OpenHab"
 /etc/init.d/openhab2 start

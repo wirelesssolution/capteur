@@ -35,6 +35,8 @@ echo "Start OpenHab"
  echo "add Samba User "
 (echo ciadmin;echo ciadmin) | sudo /usr/bin/smbpasswd  -s -a openhab
 
+npm install -g miio
+echo "User command to check IR gateway miio discover"
 
 sleep 10
 clear

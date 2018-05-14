@@ -34,8 +34,11 @@ wget -q -O /etc/openhab2/services/addons.cfg  https://raw.githubusercontent.com/
 echo "Start OpenHab"
 /etc/init.d/openhab2 start
  
- echo "add Samba User "
+echo "add Samba User "
 (echo ciadmin;echo ciadmin) | sudo /usr/bin/smbpasswd  -s -a openhab
+wget -q -O /etc/samba/smb.conf https://raw.githubusercontent.com/wirelesssolution/capteur/master/smb.conf
+/etc/init.d/samba restart
+
 
 npm install -g miio
 echo "User command to check IR gateway miio discover"

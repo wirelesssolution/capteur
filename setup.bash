@@ -33,28 +33,18 @@ rm -fr condoconfig/
 echo "Start OpenHab"
 /etc/init.d/openhab2 start
  
-clear
-sleep 60
+ echo "set samba password "
+sudo /usr/bin/smbpasswd  openhab
+(echo ciadmin; echo ciadmin) | sudo /usr/bin/smbpasswd  openhab -s
 
-cd /etc/openhab2/services
-echo "UUID"
-cat 	/var/lib/openhab2/uuid
-ln -s /var/lib/openhab2/uuid
-echo "Secret"
-cat /var/lib/openhab2/openhabcloud/secret
-ln -s /var/lib/openhab2/openhabcloud/secret
+clear
+sleep 10
+
+
 
 
 echo "change logo size 145x40 pixcel"
 scp /etc/openhab2/logo paperui/img/logo
 
-echo "get uuid"
-curl -X GET --header "Accept: text/plain" "http://192.168.0.222:8080/rest/uuid"
 
 
-echo "Todo List - chmod a+w /var/lib/openhab2/jsondb/homekit.json "
-echo "Config Openhab RUN /usr/local/bin/openhabian-config"
-echo "Done - HOMEKIT 031-45-154."
-echo "set samba password "
-sudo /usr/bin/smbpasswd  openhab
-(echo wsaadmin; echo wsaadmin) | sudo /usr/bin/smbpasswd  openhab -s

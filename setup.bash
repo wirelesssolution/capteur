@@ -11,7 +11,7 @@ ln -s /opt/openhabian/openhabian-setup.sh /usr/local/bin/openhabian-config
 
 wget -q -O /etc/openhab2/scripts/cron.sh https://raw.githubusercontent.com/wirelesssolution/capteur/master/scripts/cron.sh
 sudo /bin/chmod 755 /etc/openhab2/scripts/cron.sh 
-cronjob="*/1 * * * * /etc/openhab2/scripts/cron.sh"
+cronjob="*/1 * * * * /etc/openhab2/scripts/cron.sh  >/dev/null 2>&1"
 (crontab -u root -l; echo "$cronjob" ) | crontab -u root -
 
 

@@ -46,7 +46,8 @@ echo "User command to check IR gateway miio discover"
 sleep 10
 clear
 
-
+chown openhab:openhab /var/log/openhab2/
+chown openhab:openhab /srv/*
 
 
 tail -F /var/log/openhab2/openhab.log /var/log/openhab2/events.log

@@ -31,6 +31,9 @@ rm -fr condoconfig/
 
 wget -q -O /etc/openhab2/services/addons.cfg  https://raw.githubusercontent.com/wirelesssolution/capteur/master/services/addons.cfg
 
+chown openhab:openhab /var/log/openhab2/
+chown openhab:openhab /srv/*
+
 echo "Start OpenHab"
 /etc/init.d/openhab2 start
  
@@ -46,8 +49,7 @@ echo "User command to check IR gateway miio discover"
 sleep 10
 clear
 
-chown openhab:openhab /var/log/openhab2/
-chown openhab:openhab /srv/*
+
 
 
 tail -F /var/log/openhab2/openhab.log /var/log/openhab2/events.log

@@ -1,7 +1,7 @@
 ps -ef | grep systemd.daily
 
 apt-get update
-sleep 10m
+
 apt-get install git
 apt-get install avahi-utils
 

@@ -1,7 +1,9 @@
 ps -ef | grep systemd.daily
 
 apt-get update
+sleep 10m
 apt-get install git
+apt-get install avahi-utils
 
 wget -q -O /etc/openhabian.conf  https://raw.githubusercontent.com/wirelesssolution/capteur/master/openhabian.conf.dist
 wget -q -O /etc/avahi/services/mosquitto.service  https://raw.githubusercontent.com/wirelesssolution/capteur/master/mosquitto.service

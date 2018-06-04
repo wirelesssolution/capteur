@@ -31,6 +31,8 @@ chown -R openhab:openhab /etc/openhab2
 rm -fr condoconfig/
 
 wget -q -O /etc/openhab2/services/addons.cfg  https://raw.githubusercontent.com/wirelesssolution/capteur/master/services/addons.cfg
+wget -q -O /etc/openhab2/services/openhabcloud.cfg https://raw.githubusercontent.com/wirelesssolution/capteur/master/openhabcloud.cfg
+wget -q -O /etc/openhab2/things/demo.things https://raw.githubusercontent.com/wirelesssolution/capteur/master/demo.things
 
 chown openhab:openhab /var/log/openhab2/
 chown openhab:openhab /srv/*

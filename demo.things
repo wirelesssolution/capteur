@@ -1,0 +1,2 @@
+astro:sun:local  [ geolocation="13.813480,100.582069", interval=60 ]
+ntp:ntp:local    [ hostname="nl.pool.ntp.org", refreshInterval=60, refreshNtp=30 , timeZone="Asia/Bangkok" ]

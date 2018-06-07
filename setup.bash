@@ -53,15 +53,8 @@ npm install -g miio
 echo "User command to check IR gateway miio discover"
 
 sleep 10
-
 clear
-
-
-
-
 tail -F /var/log/openhab2/openhab.log /var/log/openhab2/events.log
-wget -q -O /etc/openhab2/services/addons.cfg  https://raw.githubusercontent.com/wirelesssolution/capteur/master/services/addons.new
-
 
 
 

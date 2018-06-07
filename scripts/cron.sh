@@ -10,7 +10,7 @@ then
 echo "Found" 
 else
 echo "Not Found" 
-ip4=$(/sbin/ifconfig eth0:0 $ip.222 netmask 255.255.255.0 up)
+ip4=$(/sbin/ifconfig eth0:0 $ip netmask 255.255.255.0 up)
 fi
 #echo 0 > /sys/class/leds/green_led/brightness
 #until wget -S --spider http://localhost:8080 2>&1 | grep -q 'HTTP/1.1 200 OK'; do

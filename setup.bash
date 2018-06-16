@@ -48,6 +48,12 @@ echo "add Samba User "
 wget -q -O /etc/samba/smb.conf https://raw.githubusercontent.com/wirelesssolution/capteur/master/smb.conf
 /etc/init.d/samba restart
 
+echo "Install FTP Server "
+sudo apt-get install pure-ftpd
+sudo pure-pw useradd capteur -u openhab -g openhab -d /srv -m
+sudo pure-pw mkdb
+sudo ln -s /etc/pure-ftpd/conf/PureDB /etc/pure-ftpd/auth/60puredb
+sudo service pure-ftpd restart
 
 npm install -g miio
 echo "User command to check IR gateway miio discover"

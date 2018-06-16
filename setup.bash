@@ -50,7 +50,7 @@ wget -q -O /etc/samba/smb.conf https://raw.githubusercontent.com/wirelesssolutio
 
 echo "Install FTP Server "
 sudo apt-get install pure-ftpd
-sudo pure-pw useradd capteur -u openhab -g openhab -d /srv -m
+(echo ciadmin;echo ciadmin) | sudo pure-pw useradd capteur -u openhab -g openhab -d /srv -m
 sudo pure-pw mkdb
 sudo ln -s /etc/pure-ftpd/conf/PureDB /etc/pure-ftpd/auth/60puredb
 sudo service pure-ftpd restart

@@ -5,8 +5,8 @@ hostname=capteur
 #userpw=password
 
 # Do not change these lines
-#username=openhab
-username=capteur
+username=openhab
+#username=capteur
 
 # Language and time. Be sure to set these to valid values
 timeserver=0.pool.ntp.org

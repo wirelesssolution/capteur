@@ -3,7 +3,7 @@ ps -ef | grep systemd.daily
 apt-get update
 
 apt-get install git
-apt-get install avahi-utils
+
 
 wget -q -O /etc/openhabian.conf  https://raw.githubusercontent.com/wirelesssolution/capteur/master/openhabian.conf.dist
 wget -q -O /etc/avahi/services/mosquitto.service  https://raw.githubusercontent.com/wirelesssolution/capteur/master/mosquitto.service
@@ -43,17 +43,19 @@ chown openhab:openhab /srv/*
 echo "Start OpenHab"
 /etc/init.d/openhab2 start
  
-echo "add Samba User "
-(echo ciadmin;echo ciadmin) | sudo /usr/bin/smbpasswd  -s -a openhab
-wget -q -O /etc/samba/smb.conf https://raw.githubusercontent.com/wirelesssolution/capteur/master/smb.conf
-/etc/init.d/samba restart
+#echo "add Samba User "
+#(echo ciadmin;echo ciadmin) | sudo /usr/bin/smbpasswd  -s -a openhab
+#wget -q -O /etc/samba/smb.conf https://raw.githubusercontent.com/wirelesssolution/capteur/master/smb.conf
+#/etc/init.d/samba restart
 
 echo "Install FTP Server "
-sudo apt-get install pure-ftpd
-(echo ciadmin;echo ciadmin) | sudo pure-pw useradd capteur -u openhab -g openhab -d /srv -m
-sudo pure-pw mkdb
-sudo ln -s /etc/pure-ftpd/conf/PureDB /etc/pure-ftpd/auth/60puredb
-sudo service pure-ftpd restart
+apt-get install pure-ftpd
+(echo ciadmin;echo ciadmin) | pure-pw useradd capteur -u openhab -g openhab -d /srv -m
+pure-pw mkdb
+ln -s /etc/pure-ftpd/conf/PureDB /etc/pure-ftpd/auth/60puredb
+service pure-ftpd restart
+apt-get remove samba
+apt-get install avahi-utils
 
 npm install -g miio
 echo "User command to check IR gateway miio discover"

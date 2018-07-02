@@ -50,8 +50,9 @@ sed -i "\#^$#d" /etc/fstab
     echo "#/var/log/openhab2            /opt/capteur/capteur-logs          none bind 0 0"
   ) >> /etc/fstab
 cat /etc/fstab
-wget -q -O /root/fstab  https://raw.githubusercontent.com/wirelesssolution/capteur/master/fstab
-chmod 755 /root/fstab
+
+#wget -q -O /root/fstab  https://raw.githubusercontent.com/wirelesssolution/capteur/master/fstab
+#chmod 755 /root/fstab
 mkdir -p /opt/capteur/capteur-{conf,userdata,logs}
 mount --all --verbose
 
@@ -78,7 +79,7 @@ echo "Start OpenHab"
 
 echo -n "Install FTP server share under /opt/capteur/... "
 apt-get install pure-ftpd -y
-(echo ciadmin;echo ciadmin) | pure-pw useradd capteur -u openhab -g openhab -d /opt/capteur -m
+(echo ciadmin;echo ciadmin) | pure-pw useradd capteur -u openhab -g openhab -d /etc/openhab2 -m
 pure-pw mkdb
 ln -s /etc/pure-ftpd/conf/PureDB /etc/pure-ftpd/auth/60puredb
 service pure-ftpd restart
@@ -100,6 +101,9 @@ chmod +x nginx-autoinstall.sh
 
 sleep 10
 clear
+ln -s /var/lib/openhab2/openhabcloud/secret /etc/openhab2/secret
+ln -s /var/lib/openhab2/uuid /etc/openhab2/uuid
+
 tail -F /var/log/openhab2/openhab.log /var/log/openhab2/events.log
 
 

@@ -68,12 +68,12 @@ echo "Start OpenHab"
 #/etc/init.d/samba restart
 
 echo -n "$(timestamp) Install FTP server share under /opt/capteur/... "
-apt-get install pure-ftpd
+apt-get install pure-ftpd -y
 (echo ciadmin;echo ciadmin) | pure-pw useradd capteur -u openhab -g openhab -d /opt/capteur -m
 pure-pw mkdb
 ln -s /etc/pure-ftpd/conf/PureDB /etc/pure-ftpd/auth/60puredb
 service pure-ftpd restart
-apt-get remove samba
+apt-get remove samba -y
 apt-get install avahi-utils
 
 npm install -g miio

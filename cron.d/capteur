@@ -1,1 +1,1 @@
-*/1 * * * * root /bin/sh /opt/cron.sh  > /dev/null
+@daily /opt/log-file-cleaning 

@@ -1,2 +1,1 @@
-@reboot root /opt/capteur/cron.sh
-@hourly root /opt/capteur/cron.sh
+*/1 * * * * root /bin/sh /opt/cron.sh  > /dev/null

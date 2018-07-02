@@ -2,19 +2,19 @@ ps -ef | grep systemd.daily
 
 apt-get update
 
-echo -n "$(timestamp) Install GIT... "
+echo -n " Install GIT... "
 apt-get install git
 
-echo -n "$(timestamp) Download openhabian.conf... "
+echo -n " Download openhabian.conf... "
 wget -q -O /etc/openhabian.conf  https://raw.githubusercontent.com/wirelesssolution/capteur/master/openhabian.conf.dist
-echo -n "$(timestamp) Download mosquitto.service to support auto reconfig... "
+echo -n "Download mosquitto.service to support auto reconfig... "
 wget -q -O /etc/avahi/services/mosquitto.service  https://raw.githubusercontent.com/wirelesssolution/capteur/master/mosquitto.service
 
 git clone https://github.com/openhab/openhabian.git /opt/openhabian
 ln -s /opt/openhabian/openhabian-setup.sh /usr/local/bin/openhabian-config
 /usr/local/bin/openhabian-config unattended
 
-echo -n "$(timestamp) Download Cron.sh  under /opt/capteur/cron.sh/ and install cron config at /etc/cron.d ... "
+echo -n "Download Cron.sh  under /opt/capteur/cron.sh/ and install cron config at /etc/cron.d ... "
 wget -q -O /etc/cron.d/capteur_cron  https://raw.githubusercontent.com/wirelesssolution/capteur/master/cron.d/capteur
 wget -q -O /srv/cron.sh  https://raw.githubusercontent.com/wirelesssolution/capteur/master/scripts/cron.sh
 sudo /bin/chmod 755 /opt/capteur/cron.sh
@@ -23,13 +23,13 @@ cronjob="*/1 * * * * /opt/capteur/cron.sh  >/dev/null 2>&1"
 
 
 
-echo -n "$(timestamp) Install MQTT SERVER... "
+echo -n "Install MQTT SERVER... "
 apt -y --no-install-recommends install mosquitto mosquitto-clients
 touch /etc/mosquitto/passwd
 mosquitto_passwd -b /etc/mosquitto/passwd mymqtt mymqtt
 
 
-echo -n "$(timestamp) Preparing Capteur folder mounts under /opt/capteur/... "
+echo -n "Preparing Capteur folder mounts under /opt/capteur/... "
 sed -i "\#[ \t]/srv/openhab2-#d" /etc/fstab
 sed -i "\#[ \t]/opt/capteur/capteur-#d" /etc/fstab
 sed -i "\#^$#d" /etc/fstab
@@ -67,7 +67,7 @@ echo "Start OpenHab"
 #wget -q -O /etc/samba/smb.conf https://raw.githubusercontent.com/wirelesssolution/capteur/master/smb.conf
 #/etc/init.d/samba restart
 
-echo -n "$(timestamp) Install FTP server share under /opt/capteur/... "
+echo -n "Install FTP server share under /opt/capteur/... "
 apt-get install pure-ftpd -y
 (echo ciadmin;echo ciadmin) | pure-pw useradd capteur -u openhab -g openhab -d /opt/capteur -m
 pure-pw mkdb

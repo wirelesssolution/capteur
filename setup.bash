@@ -74,10 +74,14 @@ pure-pw mkdb
 ln -s /etc/pure-ftpd/conf/PureDB /etc/pure-ftpd/auth/60puredb
 service pure-ftpd restart
 apt-get remove samba -y
-apt-get install avahi-utils
-
-npm install -g miio
 echo "User command to check IR gateway miio discover"
+npm install -g miio
+
+apt-get install avahi-utils -y
+
+
+
+/etc/init.d/avahi-daemon restart
 
 sleep 10
 clear

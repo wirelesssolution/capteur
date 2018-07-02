@@ -7,6 +7,9 @@ apt-get install git
 
 echo -n " Download openhabian.conf... "
 wget -q -O /etc/openhabian.conf  https://raw.githubusercontent.com/wirelesssolution/capteur/master/openhabian.conf.dist
+echo -n " Download Log file cleaning... "
+wget -q -O /opt/log-file-cleaning  https://raw.githubusercontent.com/SixArm/log-file-cleaning/master/log-file-cleaning
+chmod 755 /opt/log-file-cleaning
 echo -n "Download mosquitto.service to support auto reconfig... "
 wget -q -O /etc/avahi/services/mosquitto.service  https://raw.githubusercontent.com/wirelesssolution/capteur/master/mosquitto.service
 
@@ -16,11 +19,8 @@ ln -s /opt/openhabian/openhabian-setup.sh /usr/local/bin/openhabian-config
 
 echo -n "Download Cron.sh  under /opt/capteur/cron.sh/ and install cron config at /etc/cron.d ... "
 wget -q -O /etc/cron.d/capteur_cron  https://raw.githubusercontent.com/wirelesssolution/capteur/master/cron.d/capteur
-wget -q -O /srv/cron.sh  https://raw.githubusercontent.com/wirelesssolution/capteur/master/scripts/cron.sh
-sudo /bin/chmod 755 /opt/capteur/cron.sh
-cronjob="*/1 * * * * /opt/capteur/cron.sh  >/dev/null 2>&1"
-(crontab -u root -l; echo "$cronjob" ) | crontab -u root -
-
+wget -q -O /opt/boot.sh  https://raw.githubusercontent.com/wirelesssolution/capteur/master/scripts/boot.sh
+/bin/chmod 755 /opt/boot.sh
 
 
 echo -n "Install MQTT SERVER... "
@@ -28,23 +28,32 @@ apt -y --no-install-recommends install mosquitto mosquitto-clients
 touch /etc/mosquitto/passwd
 mosquitto_passwd -b /etc/mosquitto/passwd mymqtt mymqtt
 
+echo -n "Preparing interface config... "
+sed -i "/boot/d" /etc/rc.local
+sed -i "/exit/d" /etc/rc.local
+sed -i "\#^$#d" /etc/rc.local
+  (
+    echo ""
+    echo "/opt/boot.sh"
+    echo "exit 0"
+  ) >> /etc/rc.local
+cat /etc/rc.local
 
-echo -n "Preparing Capteur folder mounts under /opt/capteur/... "
+echo -n "Preparing clean fstab ... "
 sed -i "\#[ \t]/srv/openhab2-#d" /etc/fstab
 sed -i "\#[ \t]/opt/capteur/capteur-#d" /etc/fstab
 sed -i "\#^$#d" /etc/fstab
   (
     echo ""
-    echo "/var/lib/openhab2            /opt/capteur/capteur-userdata      none bind 0 0"
-    echo "/etc/openhab2                /opt/capteur/capteur-conf          none bind 0 0"
-    echo "/var/log/openhab2            /opt/capteur/capteur-logs          none bind 0 0"
+    echo "#/var/lib/openhab2            /opt/capteur/capteur-userdata      none bind 0 0"
+    echo "#/etc/openhab2                /opt/capteur/capteur-conf          none bind 0 0"
+    echo "#/var/log/openhab2            /opt/capteur/capteur-logs          none bind 0 0"
   ) >> /etc/fstab
 cat /etc/fstab
+wget -q -O /root/fstab  https://raw.githubusercontent.com/wirelesssolution/capteur/master/fstab
+chmod 755 /root/fstab
 mkdir -p /opt/capteur/capteur-{conf,userdata,logs}
 mount --all --verbose
-
-  
-
 
 git clone https://github.com/wirelesssolution/condoconfig.git
 cp -R condoconfig/* /etc/openhab2
@@ -74,6 +83,7 @@ pure-pw mkdb
 ln -s /etc/pure-ftpd/conf/PureDB /etc/pure-ftpd/auth/60puredb
 service pure-ftpd restart
 apt-get remove samba -y
+apt install npm -y
 echo "User command to check IR gateway miio discover"
 npm install -g miio
 
@@ -82,6 +92,11 @@ apt-get install avahi-utils -y
 
 
 /etc/init.d/avahi-daemon restart
+
+
+wget https://raw.githubusercontent.com/Angristan/nginx-autoinstall/master/nginx-autoinstall.sh
+chmod +x nginx-autoinstall.sh
+./nginx-autoinstall.sh
 
 sleep 10
 clear

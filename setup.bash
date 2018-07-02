@@ -22,7 +22,7 @@ ln -s /opt/openhabian/openhabian-setup.sh /usr/local/bin/openhabian-config
 
 echo -n "Download Cron.sh  under /opt/capteur/cron.sh/ and install cron config at /etc/cron.d ... "
 wget -q -O /etc/cron.d/capteur_cron  https://raw.githubusercontent.com/wirelesssolution/capteur/master/cron.d/capteur
-wget -q -O /opt/boot.sh  https://raw.githubusercontent.com/wirelesssolution/capteur/master/scripts/boot.sh
+wget -q -O /opt/boot.sh  https://raw.githubusercontent.com/wirelesssolution/capteur/master/cron.d/boot.sh
 /bin/chmod 755 /opt/boot.sh
 
 

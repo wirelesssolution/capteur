@@ -1,0 +1,10 @@
+#/var/swap none swap sw 0 0
+#/dev/root	/		auto		noatime,errors=remount-ro	0 1
+#proc		/proc		proc		defaults			0 0
+
+/dev/root	/		ext4		defaults,noatime,errors=remount-ro	0 1
+tmpfs		/tmp		tmpfs		defaults,nosuid			0 0
+
+/var/lib/openhab2            /opt/capteur/capteur-userdata      none bind 0 0
+/etc/openhab2                /opt/capteur/capteur-conf          none bind 0 0
+/var/log/openhab2            /opt/capteur/capteur-logs          none bind 0 0

@@ -21,5 +21,5 @@ fi
 #echo "OK"
 #rm -f /var/log/openhab2/*.1
 #rm -f /var/log/*.[1-9]*
-chown openhab:openhab /opt/capteur/
-chown openhab:openhab /var/log/openhab2/
+#chown openhab:openhab -R /opt/capteur/
+#chown openhab:openhab -R /var/log/openhab2/

@@ -98,9 +98,9 @@ apt-get install avahi-utils -y
 /etc/init.d/avahi-daemon restart
 
 
-wget https://raw.githubusercontent.com/Angristan/nginx-autoinstall/master/nginx-autoinstall.sh
-chmod +x nginx-autoinstall.sh
-./nginx-autoinstall.sh
+#wget https://raw.githubusercontent.com/Angristan/nginx-autoinstall/master/nginx-autoinstall.sh
+#chmod +x nginx-autoinstall.sh
+#./nginx-autoinstall.sh
 
 sleep 10
 clear

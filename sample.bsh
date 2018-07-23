@@ -1,0 +1,8 @@
+git clone https://github.com/wirelesssolution/condoconfig.git
+cp -R condoconfig/items/sample /etc/openhab2/items
+cp -R condoconfig/rules/sample /etc/openhab2/rules
+cp -R condoconfig/things/sample /etc/openhab2/things
+cp -R condoconfig/sitemaps/sample /etc/openhab2/sitemaps
+
+chown -R openhab:openhab /etc/openhab2
+rm -fr condoconfig/

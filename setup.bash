@@ -59,10 +59,10 @@ chmod 755 /root/fstab
 mkdir -p /opt/capteur/capteur-{conf,userdata,logs}
 mount --all --verbose
 
-git clone https://github.com/wirelesssolution/condoconfig.git
-cp -R condoconfig/* /etc/openhab2
+git clone https://github.com/wirelesssolution/config.git
+cp -R config/* /etc/openhab2
 chown -R openhab:openhab /etc/openhab2
-rm -fr condoconfig/
+rm -fr config/
 
  
 wget -q -O /etc/openhab2/services/addons.cfg  https://raw.githubusercontent.com/wirelesssolution/capteur/master/services/addons.cfg

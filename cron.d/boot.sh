@@ -1,8 +1,7 @@
 #/bin/sh
-ip1=$(/sbin/ifconfig | awk '/inet addr:192/{print substr($2,6)}' | cut -f1  -d'.' | sed '1q')
-ip2=$(/sbin/ifconfig | awk '/inet addr:192/{print substr($2,6)}' | cut -f2  -d'.' | sed '1q')
-ip3=$(/sbin/ifconfig | awk '/inet addr:192/{print substr($2,6)}' | cut -f3  -d'.' | sed '1q')
-ip=$ip1.$ip2.$ip3.'222'
+echo "Seting IP"
+LIP="$(ifconfig eth0|awk '/inet addr/ {split ($2,A,":"); print A[2]}'  | sed '$s/\w*$//' )"
+ip=$LIP'222'
 echo $ip
 fping -c1 -t300 $ip 2>/dev/null 1>/dev/null
 if [ "$?" = 0 ]

@@ -1,5 +1,9 @@
 #/bin/sh
 #
+# Edit rc.local By default this script does nothing.
+# bash /opt/boot.sh
+# exit 0
+
 echo "Seting IP"
 local_ip_value=$(ifconfig eth0|awk '/inet addr/ {split ($2,A,":"); print A[2]}'  | sed '$s/\w*$//' )
 new_ip_value=$local_ip_value'222'

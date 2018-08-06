@@ -82,7 +82,8 @@ echo "Start OpenHab"
 
 echo -n "Install FTP server share under /opt/capteur/... "
 apt-get install pure-ftpd -y
-(echo ciadmin;echo ciadmin) | pure-pw useradd capteur -u openhab -g openhab -d /opt/capteur -m
+(echo ciadmin;echo ciadmin) | pure-pw useradd config -u openhab -g openhab -d /etc/openhab2 -m
+(echo ciadmin;echo ciadmin) | pure-pw useradd userdata -u openhab -g openhab -d /var/lib/openhab2 -m
 pure-pw mkdb
 ln -s /etc/pure-ftpd/conf/PureDB /etc/pure-ftpd/auth/60puredb
 service pure-ftpd restart

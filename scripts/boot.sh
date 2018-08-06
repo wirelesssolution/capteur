@@ -10,8 +10,8 @@ new_ip_value=$local_ip_value'222'
 sudo /sbin/ifconfig eth0:0 $new_ip_value netmask 255.255.255.0 up
 if [ -f /root/fstab ]; then
             echo "File found!"
-            cp /root/fstab /etc/fstab 
-            rm /root/fstab
+            cp /opt/fstab /etc/fstab 
+            rm /opt/fstab
             mount --all --verbose
 fi
 

@@ -160,6 +160,11 @@ tail -F /var/log/openhab2/openhab.log /var/log/openhab2/events.log
 #
 # Backup config to cloud
 #
+curl https://rclone.org/install.sh | sudo bash
+apt-get install ftp
+mdkir /opt/backup
+dailybackup.sh 
+
 
 
 

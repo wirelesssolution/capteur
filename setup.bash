@@ -1,6 +1,10 @@
 #####
 ##### CREATE SD CARD 
 #####
+###  curl -s https://raw.githubusercontent.com/wirelesssolution/capteur/master/setup.bash | bash /dev/stdin arg1 arg2
+####
+####
+
 ps -ef | grep systemd.daily
 
 apt-get update
@@ -13,8 +17,6 @@ wget -q -O /etc/openhabian.conf  https://raw.githubusercontent.com/wirelesssolut
 echo -n " Download Log file cleaning... "
 wget -q -O /opt/log-file-cleaning  https://raw.githubusercontent.com/SixArm/log-file-cleaning/master/log-file-cleaning
 chmod 755 /opt/log-file-cleaning
-echo -n "Download mosquitto.service to support auto reconfig... "
-wget -q -O /etc/avahi/services/mosquitto.service  https://raw.githubusercontent.com/wirelesssolution/capteur/master/mosquitto.service
 
 git clone https://github.com/openhab/openhabian.git /opt/openhabian
 ln -s /opt/openhabian/openhabian-setup.sh /usr/local/bin/openhabian-config
@@ -54,10 +56,10 @@ sed -i "\#^$#d" /etc/fstab
   ) >> /etc/fstab
 cat /etc/fstab
 
-wget -q -O /root/fstab  https://raw.githubusercontent.com/wirelesssolution/capteur/master/fstab
-chmod 755 /root/fstab
-mkdir -p /opt/capteur/capteur-{conf,userdata,logs}
-mount --all --verbose
+#wget -q -O /root/fstab  https://raw.githubusercontent.com/wirelesssolution/capteur/master/fstab
+#chmod 755 /root/fstab
+#mkdir -p /opt/capteur/capteur-{conf,userdata,logs}
+#mount --all --verbose
 
 git clone https://github.com/wirelesssolution/config.git
 cp -R config/* /etc/openhab2
@@ -104,7 +106,9 @@ apt-get install pure-ftpd -y
 pure-pw mkdb
 ln -s /etc/pure-ftpd/conf/PureDB /etc/pure-ftpd/auth/60puredb
 service pure-ftpd restart
+
 apt-get remove samba -y
+
 apt install npm -y
 echo "User command to check IR gateway miio discover"
 npm install -g miio
@@ -112,16 +116,24 @@ npm install -g macaddress
 npm install -g fs
 
 # /usr/lib/node_modules/miio/cli/commands/mac.js remote.js
+# copy file mac.js remote.js
+#
+
 apt-get install avahi-utils -y
+echo -n "Download mosquitto.service to support auto reconfig... "
+wget -q -O /etc/avahi/services/mosquitto.service  https://raw.githubusercontent.com/wirelesssolution/capteur/master/mosquitto.service
 
 
 
 /etc/init.d/avahi-daemon restart
 
 
-#wget https://raw.githubusercontent.com/Angristan/nginx-autoinstall/master/nginx-autoinstall.sh
-#chmod +x nginx-autoinstall.sh
-#./nginx-autoinstall.sh
+wget https://raw.githubusercontent.com/Angristan/nginx-autoinstall/master/nginx-autoinstall.sh
+chmod +x nginx-autoinstall.sh
+./nginx-autoinstall.sh
+#
+#  Install WEB front page
+#
 
 sleep 10
 clear

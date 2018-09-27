@@ -14,17 +14,15 @@ then
 else
 	echo "Not Found" 
 	ip4=$(/sbin/ifconfig eth0:0 $ip netmask 255.255.255.0 up)
-	sudo find /var/log/ -type f -regex '.*\.[0-9]+\.gz$' -delete
-	MAC="$(cat /sys/class/net/eth0/address  | sed 's/[:]//g')"
- 	echo "String ulinealert \"User Line Alert\" <light>" > /etc/openhab2/items/linealert.items
-	echo "{mqtt=\">[track:/ci/smarthome/linealert/u/"$MAC"/alert:command:*:default]\"}"  >> /etc/openhab2/items/lineale
-rt.items
+#	sudo find /var/log/ -type f -regex '.*\.[0-9]+\.gz$' -delete
+#	MAC="$(cat /sys/class/net/eth0/address  | sed 's/[:]//g')"
+# 	echo "String ulinealert \"User Line Alert\" <light>" > /etc/openhab2/items/linealert.items
+#	echo "{mqtt=\">[track:/ci/smarthome/linealert/u/"$MAC"/alert:command:*:default]\"}"  >> /etc/openhab2/items/linealert.items
 fi
 
 
 						    #echo 0 > /sys/class/leds/green_led/brightness
-						    #until wget -S --spider http://localhost:8080 2>&1 | grep -q 'HTTP/1.1 
-200 OK'; do
+						    #until wget -S --spider http://localhost:8080 2>&1 | grep -q 'HTTP/1.1 200 OK'; do
 						    #sleep 1
 						    #echo 0 > /sys/class/leds/green_led/brightness
 						    #done

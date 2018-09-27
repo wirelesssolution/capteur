@@ -160,10 +160,15 @@ tail -F /var/log/openhab2/openhab.log /var/log/openhab2/events.log
 #
 # Backup config to cloud
 #
-curl https://rclone.org/install.sh | sudo bash
+# curl https://rclone.org/install.sh | sudo bash
+# NEW BACKUPCONFIG.WSA.CLOUD
+# user config
+# password ciadmin
+# /home/ftp/capteur/customer
+#
 apt-get install ftp
 mdkir /opt/backup
-dailybackup.sh 
+/opt/dailybackup.sh 
 
 
 

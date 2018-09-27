@@ -69,6 +69,7 @@ rm -fr config/
 
 rm -fr /var/log/openhab2/
 mkdir /opt/openhab2
+cd /var/log/
 ln -s /opt/openhab2 openhab2
 chown -R openhab:openhab  /opt/openhab2
 chown -R openhab:openhab  /var/log/openhab2
@@ -115,6 +116,9 @@ npm install -g miio
 npm install -g macaddress
 npm install -g fs
 
+wget -q -O /usr/lib/node_modules/miio/cli/commands/mac.js https://raw.githubusercontent.com/wirelesssolution/capteur/master/nodejs/mac.js
+wget -q -O /usr/lib/node_modules/miio/cli/commands/remote.js https://raw.githubusercontent.com/wirelesssolution/capteur/master/nodejs/remote.js
+
 # /usr/lib/node_modules/miio/cli/commands/mac.js remote.js
 # copy file mac.js remote.js
 #
@@ -134,6 +138,14 @@ chmod +x nginx-autoinstall.sh
 #
 #  Install WEB front page
 #
+get -q -O /etc/nginx/sites-enabled/openhab.conf https://raw.githubusercontent.com/wirelesssolution/capteur/master/nginx/openhab.conf
+
+
+get -q -O /usr/lib/node_modules/frontail/preset/openhab.json https://raw.githubusercontent.com/wirelesssolution/capteur/master/logviewer/openhab.json
+
+# vi /etc/nginx/.htpasswd
+# key capteur:$apr1$P6R8ZlxX$nVZFkrFXaXzO0rZnp4VuC0
+
 
 sleep 10
 clear
@@ -144,6 +156,10 @@ echo " "
 
 # Remove UUID / Secret
 tail -F /var/log/openhab2/openhab.log /var/log/openhab2/events.log
+#
+#
+# Backup config to cloud
+#
 
 
 

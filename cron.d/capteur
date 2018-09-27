@@ -1,4 +1,4 @@
-@daily /opt/log-file-cleaning 
-0 1 * * *	/usr/bin/find /var/log/ -type f -regex '.*\.[0-9]+\.gz$' -delete
-0 1 * * *	/usr/bin/find /opt/ -type f -regex '.*\.[0-9]$' -delete
-* * * * * 	/opt/boot.sh
+@daily root /opt/log-file-cleaning 
+0 1 * * * root /usr/bin/find /var/log/ -type f -regex '.*\.[0-9]+\.gz$' -delete
+0 1 * * * root /usr/bin/find /opt/ -type f -regex '.*\.[0-9]$' -delete
+* * * * * root /opt/boot.sh

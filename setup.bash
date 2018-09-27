@@ -64,6 +64,23 @@ cp -R config/* /etc/openhab2
 chown -R openhab:openhab /etc/openhab2
 rm -fr config/
 
+
+rm -fr /var/log/openhab2/
+mkdir /opt/openhab2
+ln -s /opt/openhab2 openhab2
+chown -R openhab:openhab  /opt/openhab2
+chown -R openhab:openhab  /var/log/openhab2
+chown -R openhab:openhab  /etc/openhab2/
+
+crontab remove log file
+0 1 * * *	/usr/bin/find /var/log/ -type f -regex '.*\.[0-9]+\.gz$' -delete
+0 1 * * *	/usr/bin/find /opt/ -type f -regex '.*\.[0-9]$' -delete
+
+
+
+
+
+ 
  
 wget -q -O /etc/openhab2/services/addons.cfg  https://raw.githubusercontent.com/wirelesssolution/capteur/master/services/addons.cfg
 wget -q -O /etc/openhab2/services/openhabcloud.cfg https://raw.githubusercontent.com/wirelesssolution/capteur/master/openhabcloud.cfg
@@ -91,7 +108,10 @@ apt-get remove samba -y
 apt install npm -y
 echo "User command to check IR gateway miio discover"
 npm install -g miio
+npm install -g macaddress
+npm install -g fs
 
+# /usr/lib/node_modules/miio/cli/commands/mac.js remote.js
 apt-get install avahi-utils -y
 
 
@@ -110,7 +130,7 @@ echo "RUN /root/install.sh flash to Controller Box"
 echo " "
 echo " "
 
-
+# Remove UUID / Secret
 tail -F /var/log/openhab2/openhab.log /var/log/openhab2/events.log
 
 

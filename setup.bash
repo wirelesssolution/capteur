@@ -22,6 +22,13 @@ git clone https://github.com/openhab/openhabian.git /opt/openhabian
 ln -s /opt/openhabian/openhabian-setup.sh /usr/local/bin/openhabian-config
 /usr/local/bin/openhabian-config unattended
 
+
+cd /root
+wget https://github.com/wirelesssolution/capteur/blob/master/Java/local_policy.jar
+wget https://github.com/wirelesssolution/capteur/blob/master/Java/US_export_policy.jar
+cp *jar /usr/lib/jvm/zulu-embedded-8-armhf/jre/lib/security
+cp *jar /usr/lib/jvm/zulu-embedded-8-armhf/lib
+
 echo -n "Download Cron.sh  under /opt/capteur/cron.sh/ and install cron config at /etc/cron.d ... "
 wget -q -O /etc/cron.d/capteur_cron  https://raw.githubusercontent.com/wirelesssolution/capteur/master/cron.d/capteur
 wget -q -O /opt/boot.sh  https://raw.githubusercontent.com/wirelesssolution/capteur/master/cron.d/boot.sh

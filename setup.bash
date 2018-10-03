@@ -181,6 +181,8 @@ Download IP camera
 http://www.pcmus.com/openhab/IpCameraBinding/ipcamera-15-08-2018.zip
 mv org.openhab.binding.ipcamera-2.3.0-SNAPSHOT.jar /usr/share/openhab2/addons/
 
+for bluetooeh
+apt install blueman
 
 
 

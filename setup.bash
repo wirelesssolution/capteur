@@ -271,5 +271,6 @@ chown -R openhab:openhab /var/log/openhab2/
 chown -R openhab:openhab /usr/share/openhab2/
 chown -R openhab:openhab /etc/openhab2/
 
-
+### setup script to replace all config
+find ./ -type f -exec sed -i 's/CAPTEUR_XXXXXX/CAPTEUR_XXXXX1/g' {} \;
 

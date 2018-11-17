@@ -184,5 +184,79 @@ mv org.openhab.binding.ipcamera-2.3.0-SNAPSHOT.jar /usr/share/openhab2/addons/
 for bluetooeh
 apt install blueman
 
+# find / -uid 1023 -exec chown root:root {} +
+chown -R openhab:openhab /var/log/openhab2/
+chown -R openhab:openhab /usr/share/openhab2/
+chown -R openhab:openhab /etc/openhab2/
+# Disable log2ram
+# systemctl stop rsyslog.service
+# systemctl stop syslog.socket
+# lsof /var/log
+#(make sure it's empty)
+# systemctl stop log2ram
+# systemctl disable log2ram
+# mv /var/log /var/oldlog
+# rsync -avPHAXx /var/oldlog /var/log
+# reboot
+
+#edit /etc/rsyslog.d/50-default.conf
+#disable all syslog
+
+#install WIFI Access Point
+sudo apt-get update
+sudo apt-get install hostapd isc-dhcp-server
+vi /etc/dhcp/dhcpd.conf
+#option domain-name "example.org";
+#option domain-name-servers ns1.example.org, ns2.example.org;
+authoritative;
+#add 
+subnet 192.168.42.0 netmask 255.255.255.0 {
+	range 192.168.42.10 192.168.42.50;
+	option broadcast-address 192.168.42.255;
+	option routers 192.168.42.1;
+	default-lease-time 600;
+	max-lease-time 7200;
+	option domain-name "local";
+	option domain-name-servers 8.8.8.8, 8.8.4.4;
+}
+and save
+vi /etc/default/isc-dhcp-server
+INTERFACES="wlan0"
+vi /etc/network/interface
+iface wlan0 inet static
+  address 192.168.42.1
+  netmask 255.255.255.0
+  
+  sudo ifconfig wlan0 192.168.42.1
+vi /etc/openhab2/wifi/wifi.conf
+# Basic configuration
+ssid=CAPTEUR_AP
+wpa_passphrase=ci12345678
+#
+interface=wlan0
+driver=nl80211
+hw_mode=g
+# WPA and WPA2 configuration
+channel=6
+macaddr_acl=0
+auth_algs=1
+ignore_broadcast_ssid=0
+wpa=2
+
+wpa_key_mgmt=WPA-PSK
+wpa_pairwise=TKIP
+wpa_group_rekey=86400
+ieee80211n=1
+wme_enabled=1
+#rsn_pairwise=CCMP TKIP
+
+vi /etc/default/hostapd
+DAEMON_CONF="/etc/openhab2/wifi/wifi.conf"
+vi  /etc/sysctl.conf
+net.ipv4.ip_forward=1
+sudo sh -c "echo 1 > /proc/sys/net/ipv4/ip_forward"
+sudo /usr/sbin/hostapd /etc/openhab2/wifi/wifi.conf
+
+
 
 

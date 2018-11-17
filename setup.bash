@@ -184,7 +184,7 @@ mv org.openhab.binding.ipcamera-2.3.0-SNAPSHOT.jar /usr/share/openhab2/addons/
 for bluetooeh
 apt install blueman
 
-# find / -uid 1023 -exec chown root:root {} +
+find / -uid 1023 -exec chown root:root {} +
 chown -R openhab:openhab /var/log/openhab2/
 chown -R openhab:openhab /usr/share/openhab2/
 chown -R openhab:openhab /etc/openhab2/
@@ -226,8 +226,14 @@ vi /etc/network/interface
 iface wlan0 inet static
   address 192.168.42.1
   netmask 255.255.255.0
-  
-  sudo ifconfig wlan0 192.168.42.1
+
+vi /etc/rc.local
+/sbin/ifconfig wlan0 192.168.42.1
+
+rm /var/lib/openhab2/uuid
+rm /var/lib/openhab2/openhabcloud/secret
+
+
 vi /etc/openhab2/wifi/wifi.conf
 # Basic configuration
 ssid=CAPTEUR_AP
@@ -257,6 +263,13 @@ net.ipv4.ip_forward=1
 sudo sh -c "echo 1 > /proc/sys/net/ipv4/ip_forward"
 sudo /usr/sbin/hostapd /etc/openhab2/wifi/wifi.conf
 
+## add install file
+find / -uid 1023 -exec chown root:root {} +
+rm /var/lib/openhab2/uuid
+rm /var/lib/openhab2/openhabcloud/secret
+chown -R openhab:openhab /var/log/openhab2/
+chown -R openhab:openhab /usr/share/openhab2/
+chown -R openhab:openhab /etc/openhab2/
 
 
 
